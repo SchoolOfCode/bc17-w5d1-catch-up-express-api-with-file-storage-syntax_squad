@@ -25,21 +25,9 @@ app.get( '/', (req, res) => {
 });
 
 
-app.get('/api/recipes', async (req, res) => {
-  try {
-    const recipes = await getRecipes();
-    res.status(200).json({
-      sucess: true,
-      payload: recipes,
-    });
-  } catch (error) {
-    res.status(500).send({
-      success: false,
-      payload: “Internal server error”,
-    });
-  }
-});
-
+app.get( '/api/recipes', (req, res) => {
+  res.json(recipes);
+})
 // async function readJsonFile(filePath) {
 //   try {
 //       const data = await fs.readFile(filePath, 'utf-8'); // create a variable that reads the files from the filePath
