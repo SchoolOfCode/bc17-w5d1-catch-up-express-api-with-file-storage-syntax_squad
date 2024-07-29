@@ -26,8 +26,12 @@ app.get( '/', (req, res) => {
 
 
 app.get( '/api/recipes', (req, res) => {
+  res.status(200).json({ success: true, payload: recipes });
   res.json(recipes);
+  
 })
+
+
 // async function readJsonFile(filePath) {
 //   try {
 //       const data = await fs.readFile(filePath, 'utf-8'); // create a variable that reads the files from the filePath
