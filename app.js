@@ -1,5 +1,5 @@
 import express from "express";
-import recipes from './recipes.json' assert {type: "json"};
+import recipes from "./recipes.json" assert { type: "json" };
 //console.log(recipes);
 
 import {
@@ -16,21 +16,30 @@ const PORT = 3000;
 app.use(express.static("public"));
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Hello world!");
+});
+
+app.get("/api/recipes", (req, res) => {
+  res.status(200).json({ success: true, payload: recipes });
+  res.json(recipes);
+});
+
+app.get("/api/recipes/:id", async (req, res) => {
+  try {
+    const recipe = await getRecipeByID(req.params.id);
+    res.status(200).json({
+      sucess: true,
+      payload: recipe,
+    });
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
-
-app.get( '/', (req, res) => { 
-  res.send('Hello world!')
-});
-
-
-app.get( '/api/recipes', (req, res) => {
-  res.status(200).json({ success: true, payload: recipes });
-  res.json(recipes);
-  
-})
-
 
 // async function readJsonFile(filePath) {
 //   try {
