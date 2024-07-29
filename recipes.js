@@ -4,7 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 const fileName = "recipes.json";
 
 // GET ALL RECIPES
-export async function getRecipes() {}
+export async function getRecipes() {
+    return getRecipes;
+};
 
 // GET A RECIPE BY ID
 export async function getRecipeByID(id) {}
